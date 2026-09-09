@@ -1,6 +1,7 @@
 # PDF RAG Assistant
 
 A simple Retrieval-Augmented Generation (RAG) application that allows users to upload a PDF and ask questions about its content.
+**Live Demo:** [Try the app on Streamlit](https://pdf-rag-assistant-lvkgeastzlerw6ks2sappjf.streamlit.app/)
 
 The application extracts the text from the PDF, splits it into smaller chunks, creates embeddings, and indexes them with FAISS. When the user asks a question, the most relevant chunks are retrieved and provided as context to a Gemini model to generate an answer.
 
