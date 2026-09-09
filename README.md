@@ -46,7 +46,7 @@ The application extracts the text from the PDF, splits it into smaller chunks, c
 Clone the repository and install the dependencies:
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/PennyGian/pdf-rag-assistant.git
 cd pdf-rag-assistant
 uv sync
 ```
