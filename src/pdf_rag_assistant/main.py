@@ -89,7 +89,7 @@ with st.spinner("Processing your PDF..."):
 
 
 query = st.text_input("Ask a question about the PDF", key="query")
-if not query:
+if not query.strip():
     st.stop()
 
 with st.spinner("Searching the PDF and generating an answer..."):
