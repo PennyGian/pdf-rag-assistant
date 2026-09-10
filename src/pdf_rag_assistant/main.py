@@ -32,8 +32,12 @@ if st.session_state.get("current_file") != file_signature:
     st.session_state.current_file = file_signature
     st.session_state.query = ""
 
-reader = PdfReader(uploaded_file)
-pages = reader.pages
+try:
+    reader = PdfReader(uploaded_file)
+    pages = reader.pages
+except Exception:
+    st.error("Could not read this PDF. The file may be corrupted or password-protected.")
+    st.stop()
 
 if len(pages)> 40:
     st.error("Please upload a PDF with 40 pages or fewer.")
@@ -100,6 +104,8 @@ with st.spinner("Searching the PDF and generating an answer..."):
 
     prompt = f"""
     Answer the question using only the context provided below.
+    If the answer cannot be found in the context, say:
+    "I could not find this information in the PDF" 
     
     Context:
     {context}
@@ -115,7 +121,11 @@ with st.spinner("Searching the PDF and generating an answer..."):
         model="gemini-3.5-flash-lite"
     )
 
-    response = llm.invoke(prompt)
+    try:
+        response = llm.invoke(prompt)
+    except Exception:
+        st.error("Could not generate an answer. Please try again later.")
+        st.stop()
 
 
 st.subheader("Answer")
