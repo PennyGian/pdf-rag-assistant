@@ -27,6 +27,11 @@ uploaded_file = st.file_uploader(
 if uploaded_file is None:
     st.stop()
 
+file_signature = (uploaded_file.name, uploaded_file.size)
+if st.session_stage.get("current_file") != file_signature:
+    st.session_state.current_file = file_signature
+    st.session_State.query = ""
+
 reader = PdfReader(uploaded_file)
 pages = reader.pages
 
@@ -78,7 +83,7 @@ with st.spinner("Processing your PDF..."):
     vector_store = create_vector_store(chunks)
 
 
-query = st.text_input("Ask a question about the PDF")
+query = st.text_input("Ask a question about the PDF", key="query")
 if not query:
     st.stop()
 
