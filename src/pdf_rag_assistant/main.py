@@ -30,6 +30,10 @@ if uploaded_file is None:
 reader = PdfReader(uploaded_file)
 pages = reader.pages
 
+if len(pages)> 40:
+    st.error("Please upload a PDF with 40 pages or fewer.")
+    st.stop()
+
 st.caption(f"📄 {uploaded_file.name} · {len(pages)} pages")
 
 # Extract text from the PDF
