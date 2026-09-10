@@ -30,7 +30,7 @@ if uploaded_file is None:
 file_signature = (uploaded_file.name, uploaded_file.size)
 if st.session_state.get("current_file") != file_signature:
     st.session_state.current_file = file_signature
-    st.session_State.query = ""
+    st.session_state.query = ""
 
 reader = PdfReader(uploaded_file)
 pages = reader.pages
