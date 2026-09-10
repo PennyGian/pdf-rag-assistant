@@ -55,7 +55,7 @@ chunks = splitter.split_text(pdf_text)
 
 
 # Create embeddings and build the FAISS index
-@st.cache_resource(show_spinner=False)
+@st.cache_resource(show_spinner=False, max_entries=1)
 def create_vector_store(text_chunks):
 
     embeddings = FastEmbedEmbeddings(
