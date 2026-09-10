@@ -35,15 +35,16 @@ if st.session_state.get("current_file") != file_signature:
 try:
     reader = PdfReader(uploaded_file)
     pages = reader.pages
+    page_count = len(pages)
 except Exception:
     st.error("Could not read this PDF. The file may be corrupted or password-protected.")
     st.stop()
 
-if len(pages)> 40:
+if page_count > 40:
     st.error("Please upload a PDF with 40 pages or fewer.")
     st.stop()
 
-st.caption(f"📄 {uploaded_file.name} · {len(pages)} pages")
+st.caption(f"📄 {uploaded_file.name} · {page_count} pages")
 
 # Extract text from the PDF
 pdf_text = ""
