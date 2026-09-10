@@ -28,7 +28,7 @@ if uploaded_file is None:
     st.stop()
 
 file_signature = (uploaded_file.name, uploaded_file.size)
-if st.session_stage.get("current_file") != file_signature:
+if st.session_state.get("current_file") != file_signature:
     st.session_state.current_file = file_signature
     st.session_State.query = ""
 
