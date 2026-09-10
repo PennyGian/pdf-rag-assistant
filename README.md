@@ -14,6 +14,8 @@ The application extracts the text from the PDF, splits it into smaller chunks, c
 - Retrieve the 5 most relevant chunks for each question
 - Generate answers using Gemini based only on the retrieved context
 - View the retrieved chunks used to generate the answer
+- Supports PDFs up to 40 pages to ensure stable processing on the deployed demo.
+- Returns a clear fallback response when the answer cannot be found in the retrieved PDF context.
 
 ## Tech Stack
 
@@ -33,7 +35,7 @@ The application extracts the text from the PDF, splits it into smaller chunks, c
 4. FastEmbed converts the chunks into embeddings, which are indexed with FAISS.
 5. When a question is asked, it is converted into an embedding and FAISS retrieves the 5 most relevant chunks using similarity search.
 6. The retrieved chunks are passed to Gemini as context together with the question.
-7. Gemini generates an answer based only on the provided context.
+7. Gemini generates an answer based only on the provided context, or returns a fallback response if the answer cannot be found.
 
 ## Limitations
 
@@ -41,6 +43,7 @@ The application extracts the text from the PDF, splits it into smaller chunks, c
 - Answer quality depends on whether the relevant information is included in the retrieved chunks.
 - Broad or multi-part questions may require information from more chunks than the current retrieval setup provides.
 - The application currently processes one PDF at a time.
+- The deployed demo limits uploads up to 40 pages to reduce resource usage and improve stability.
 
 ## Run Locally
 
